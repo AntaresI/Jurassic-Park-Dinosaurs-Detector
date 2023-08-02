@@ -1,6 +1,3 @@
-
-
-
 from bing_image_downloader import downloader
 import os
 import time
