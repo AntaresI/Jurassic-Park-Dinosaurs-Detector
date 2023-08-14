@@ -4,7 +4,7 @@ import os
 import shutil
 from PIL import Image
 import imagehash
-import numpy as np
+
 
 '''LOADING NAMES OF DINOSAURS AND PREPARING THE MAIN DIRECTORY'''
 with open("Dinosaurs.txt","r") as dinos:
