@@ -3,9 +3,10 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.layers import Dense, Flatten,Dropout
 from tensorflow.keras.models import Model
-# from tensorflow.keras.applications import EfficientNetV2S
+from tensorflow.keras.applications import EfficientNetV2S
+
 from tensorflow.keras.applications import VGG16
-# from tensorflow.keras.applications import VGG19
+from tensorflow.keras.applications import VGG19
 # from tensorflow.keras.applications import InceptionResNetV2
 # from tensorflow.keras.applications import InceptionV3
 #from tensorflow.keras.callbacks import EarlyStopping
@@ -69,13 +70,15 @@ vgg = VGG16(input_shape=[224,224,3], weights='imagenet', include_top=False)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """UNFREEZING THE MODEL SO THAT THE WEIGHTS CAN CHANGE (WORKED THE BEST AFTER SEVERAL EXPERIMENTS)"""
-for layer in vgg.layers[:1]:
+for layer in vgg.layers[:4]:
     layer.trainable = False
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ADDING A DENSE LAYER WITH DROPOUT AT THE END OF THE MODEL AND THEN PREDICTION LAYER"""
 x = Flatten()(vgg.output)
-x = Dense(500, activation='relu')(x)
+x = Dense(700, activation='relu')(x)
+x = Dropout(0.5)(x)
+x = Dense(300, activation='relu')(x)
 x = Dropout(0.5)(x)
 prediction = Dense(47, activation='softmax')(x)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -92,7 +95,7 @@ model.summary()
 """CREATING THE OPTIMIZER"""
 # learning_rate_decay_factor = (0.0001/0.001)
 # decay = tf.optimizers.schedules.CosineDecay(initial_learning_rate=0.001,decay_steps=args.epochs*(10000/args.batch_size), alpha=learning_rate_decay_factor)
-optimize = tf.optimizers.Adam(learning_rate = 1e-5)
+optimize = tf.optimizers.Adam(learning_rate = 3e-6)
 #optimize = tf.optimizers.SGD(learning_rate=1e-4, momentum=0.9)
 """"""""""""""""""""""""""""""
 
@@ -121,7 +124,7 @@ model.evaluate(test_set,batch_size=args.batch_size)
 """"""""""""""""""""""""""""""""
 
 """SAVING WEIGHTS"""
-model.save("vgg16-weights-final.h5")
+model.save("vgg16 3-weights-final.h5")
 """"""""""""""""""""
 
 """PLOTTING THE ACCURACY AND LOSS AFTER TRAINING"""
