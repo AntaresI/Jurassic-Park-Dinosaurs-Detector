@@ -76,5 +76,5 @@ def train_val_test_splitter(train_split=0.64, val_split=0.16, test_split=0.20):
               
         """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         
-train_val_test_splitter()   
+train_val_test_splitter(0.8,0.1,0.1)   
             

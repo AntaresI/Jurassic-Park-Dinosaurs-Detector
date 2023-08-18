@@ -1,9 +1,11 @@
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.layers import Dense, Flatten,Dropout
+from tensorflow.keras.layers import Dense, Flatten,Dropout, MaxPooling2D
 from tensorflow.keras.models import Model
-# from tensorflow.keras.applications import EfficientNetV2S
+from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.applications import VGG16
+from tensorflow.keras.applications import MobileNet
+from tensorflow.keras.applications import MobileNetV2
 # from tensorflow.keras.applications import VGG19
 # from tensorflow.keras.applications import InceptionResNetV2
 # from tensorflow.keras.applications import InceptionV3
@@ -64,17 +66,19 @@ val_set = val_datagen.flow_from_directory(val_path,
 
 
 """LOADING A PRE-TRAINED MODEL FOR TRANSFER LEARNING"""
-vgg = VGG16(input_shape=[224,224,3], weights='imagenet', include_top=False)
+vgg = MobileNet(input_shape=[224,224,3], weights='imagenet', include_top=False)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """UNFREEZING THE MODEL SO THAT THE WEIGHTS CAN CHANGE (WORKED THE BEST AFTER SEVERAL EXPERIMENTS)"""
-for layer in vgg.layers[:1]:
+for layer in vgg.layers[:3]:
     layer.trainable = False
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ADDING A DENSE LAYER WITH DROPOUT AT THE END OF THE MODEL AND THEN PREDICTION LAYER"""
-x = Flatten()(vgg.output)
-x = Dense(500, activation='relu')(x)
+x = MaxPooling2D(pool_size=(2, 2),
+   strides=(2, 2), padding='valid')(vgg.output)
+x = Flatten()(x)
+x = Dense(700, activation='relu')(x)
 x = Dropout(0.5)(x)
 prediction = Dense(47, activation='softmax')(x)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -91,7 +95,7 @@ model.summary()
 """CREATING THE OPTIMIZER"""
 # learning_rate_decay_factor = (0.0001/0.001)
 # decay = tf.optimizers.schedules.CosineDecay(initial_learning_rate=0.001,decay_steps=args.epochs*(10000/args.batch_size), alpha=learning_rate_decay_factor)
-optimize = tf.optimizers.Adam(learning_rate = 1e-5)
+optimize = tf.optimizers.Adam(learning_rate = 1e-4)
 #optimize = tf.optimizers.SGD(learning_rate=1e-4, momentum=0.9)
 """"""""""""""""""""""""""""""
 
@@ -120,17 +124,18 @@ model.evaluate(test_set,batch_size=args.batch_size)
 """"""""""""""""""""""""""""""""
 
 """SAVING WEIGHTS"""
-model.save("vgg16-weights-final.h5")
+model.save("efficient_net_b0_weights_1.h5")
 """"""""""""""""""""
 
 """PLOTTING THE ACCURACY AND LOSS AFTER TRAINING"""
+plt.figure(1,figsize=(16,8))
 plt.plot(history.history['loss'], label='train loss')
 plt.plot(history.history['val_loss'], label='val loss')
 plt.xlabel("Epochs")
 plt.ylabel("Loss")
 plt.legend()
 
-plt.show()
+plt.figure(2,figsize=(16,8))
 plt.plot(history.history['accuracy'], label='train accuracy')
 plt.plot(history.history['val_accuracy'], label='val accuracy')
 plt.xlabel("Epochs")
