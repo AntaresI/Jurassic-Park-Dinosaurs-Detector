@@ -19,4 +19,12 @@ Then a training, validation and test set needed to be created, but so that there
 
 # Model
 I wrote the script `training_model.py` for loading the dataset into Tensorflow, constructing the model, training it and displaying loss and accuracy graphs.
-I experimented with many models, but in the end I realized that given that this model is very small and divided into many classes, as small pre-trained model as possible should be used, so I used the 2nd smallest available model in [Keras trained CNN models](https://keras.io/api/applications/) which is `MobileNet`. I allowed the model to train all but its first 3 layers so that it could adapt to the new small and multiple-class dataset, I also finetuned the model with a  `MaxPooling2D` layer, `Dense` layer and `dropout` layer. This model was trained for 40 epochs with a batch_size of 20
+I used the `MobileNet` model available in [Keras trained CNN models](https://keras.io/api/applications/). I allowed the model to train all but its first 3 layers so that it could adapt to the new small and multiple-class dataset, I also finetuned the model with a  `MaxPooling2D` layer, `Dense` layer and `dropout` layer. This model was trained for 40 epochs with a batch_size of 20. 
+
+TODO PLACE THE ACCURACY AND LOSS GRAPHS
+
+# Predicting 
+I wrote `predict_one_image.py` script that takes a path to an image and predicts which dinosaur it is. 
+For a folder of images the same can be done with `predict_images.py`
+TODO ukázky prediction
+
