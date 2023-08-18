@@ -2,7 +2,7 @@
 Jurassic Park 47 dinosaurs Convolutional Neural Network (CNN) model trained with Tensorflow on images of dinosaurs from Bing.
 
 # Website
-The model is hosted via Streamlit here: TODO
+The model is hosted via Streamlit here: [Dinosaur detector](https://mqvscmjomxjrnigtvmxevz.streamlit.app/)
 
 # Demonstration
 Here is a quick demonstration of the website and model predictions TODO
