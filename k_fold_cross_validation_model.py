@@ -14,21 +14,21 @@ import tensorflow as tf
 import argparse
 import matplotlib.pyplot as plt
 import json
-
+from tensorflow.keras.applications import MobileNet
 def create_model():
     
     """LOADING A PRE-TRAINED MODEL FOR TRANSFER LEARNING"""
-    vgg = VGG16(input_shape=[224,224,3], weights='imagenet', include_top=False)
+    vgg = MobileNet(input_shape=[224,224,3], weights='imagenet', include_top=False)
     """"""""""""""""""""""""""""""""""""""""""""""""""""""
     
     """UNFREEZING THE MODEL SO THAT THE WEIGHTS CAN CHANGE (WORKED THE BEST AFTER SEVERAL EXPERIMENTS)"""
-    for layer in vgg.layers[:4]:
+    for layer in vgg.layers[:3]:
         layer.trainable = False
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     
     """ADDING A DENSE LAYER WITH DROPOUT AT THE END OF THE MODEL AND THEN PREDICTION LAYER"""
     x = Flatten()(vgg.output)
-    x = Dense(700, activation='relu')(x)
+    x = Dense(300, activation='relu')(x)
     x = Dropout(0.5)(x)
     prediction = Dense(47, activation='softmax')(x)
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -45,7 +45,7 @@ def create_model():
     """CREATING THE OPTIMIZER"""
     # learning_rate_decay_factor = (0.0001/0.001)
     # decay = tf.optimizers.schedules.CosineDecay(initial_learning_rate=0.001,decay_steps=args.epochs*(10000/args.batch_size), alpha=learning_rate_decay_factor)
-    optimize = tf.optimizers.Adam(learning_rate = 3e-5)
+    optimize = tf.optimizers.Adam(learning_rate = 1e-4)
     #optimize = tf.optimizers.SGD(learning_rate=1e-4, momentum=0.9)
     """"""""""""""""""""""""""""""
     
@@ -163,23 +163,26 @@ if __name__ == "__main__":
         """"""""""""""""""""""""""""""""
         
         """SAVING WEIGHTS"""
-        model.save("vgg16 3-weights-final{counter}.h5")
+        model.save("modelnet_5_fold_weights_{counter}.h5")
         """"""""""""""""""""
         
         """PLOTTING THE ACCURACY AND LOSS AFTER TRAINING"""
+        plt.figure(1,figsize=(16,8))
         plt.plot(history.history['loss'], label='train loss')
         plt.plot(history.history['val_loss'], label='val loss')
         plt.xlabel("Epochs")
         plt.ylabel("Loss")
+        plt.title(f"Fold number{counter}")
         plt.legend()
-        
-        plt.show()
-        plt.plot(history.history['accuracy'], label='train accuracy')
-        plt.plot(history.history['val_accuracy'], label='val accuracy')
+  
+        plt.figure(2,figsize=(16,8))
+        plt.plot(np.asarray(history.history['accuracy'])*100, label='train accuracy')
+        plt.plot(np.asarray(history.history['val_accuracy'])*100, label='val accuracy')
         plt.xlabel("Epochs")
         plt.ylabel("Accuracy [%]")
+        plt.title(f"Fold number{counter}")
         plt.legend()
-        
+  
         plt.show()
         """"""""""""""""""""""""""""""""""""""""""""""""""
     """"""""""""""""""""

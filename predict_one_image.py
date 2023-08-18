@@ -23,7 +23,7 @@ def predict_one(img_path):
         
     dino_labels = json.loads(dino_labels) 
    
-    model = load_model('vgg16 3-weights-final.h5')
+    model = load_model('mobilenet_weights.h5')
     
     im = Image.open(img_path)
 

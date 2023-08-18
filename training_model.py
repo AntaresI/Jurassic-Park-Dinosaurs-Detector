@@ -13,7 +13,7 @@ from tensorflow.keras.applications import MobileNetV2
 import tensorflow as tf
 import argparse
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 """INITIALIZING A GENERATOR FOR IMAGES WITH SOME PREPROCESSING"""
 train_datagen = ImageDataGenerator(rescale = 1./255,
@@ -78,7 +78,7 @@ for layer in vgg.layers[:3]:
 x = MaxPooling2D(pool_size=(2, 2),
    strides=(2, 2), padding='valid')(vgg.output)
 x = Flatten()(x)
-x = Dense(300, activation='relu')(x)
+x = Dense(400, activation='relu')(x)
 x = Dropout(0.5)(x)
 prediction = Dense(47, activation='softmax')(x)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,7 +124,7 @@ model.evaluate(test_set,batch_size=args.batch_size)
 """"""""""""""""""""""""""""""""
 
 """SAVING WEIGHTS"""
-model.save("efficient_net_b0_weights_1.h5")
+model.save("modelnet_weights_1.h5")
 """"""""""""""""""""
 
 """PLOTTING THE ACCURACY AND LOSS AFTER TRAINING"""
@@ -136,8 +136,8 @@ plt.ylabel("Loss")
 plt.legend()
 
 plt.figure(2,figsize=(16,8))
-plt.plot(history.history['accuracy'], label='train accuracy')
-plt.plot(history.history['val_accuracy'], label='val accuracy')
+plt.plot(np.asarray(history.history['accuracy'])*100, label='train accuracy')
+plt.plot(np.asarray(history.history['val_accuracy'])*100, label='val accuracy')
 plt.xlabel("Epochs")
 plt.ylabel("Accuracy [%]")
 plt.legend()
