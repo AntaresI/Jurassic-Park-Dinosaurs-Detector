@@ -78,7 +78,7 @@ for layer in vgg.layers[:3]:
 x = MaxPooling2D(pool_size=(2, 2),
    strides=(2, 2), padding='valid')(vgg.output)
 x = Flatten()(x)
-x = Dense(700, activation='relu')(x)
+x = Dense(300, activation='relu')(x)
 x = Dropout(0.5)(x)
 prediction = Dense(47, activation='softmax')(x)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
