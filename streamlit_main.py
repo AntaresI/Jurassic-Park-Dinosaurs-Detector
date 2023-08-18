@@ -5,7 +5,7 @@ import streamlit as st
 
 import os
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 import seaborn as sns
 from PIL import Image
@@ -46,6 +46,7 @@ if uploaded_file is not None:
         st.image(display_image)
         st.text(os.getcwd())
         prediction = predict_one(os.path.join('images_to_predict',uploaded_file.name))
+        
         st.text(f"The model thinks that this dinosaur is a {prediction}")
         # os.remove('images_to_predict/'+uploaded_file.name)
 
