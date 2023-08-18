@@ -7,12 +7,12 @@ import os
 
 #import matplotlib.pyplot as plt
 
-import seaborn as sns
+# import seaborn as sns
 from PIL import Image
 
-sns.set_theme(style="darkgrid")
+# sns.set_theme(style="darkgrid")
 
-sns.set()
+# sns.set()
 
 
 
