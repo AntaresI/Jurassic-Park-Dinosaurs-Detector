@@ -8,9 +8,9 @@ The model is hosted via Streamlit here: TODO
 Here is a quick demonstration of the website and model predictions TODO
 
 # Dataset
-I wrote and used the script `dinos_downloader.py` which downloads images from Bing to create my own custom dataset of 47 species of dinosaurs. The dataset can be found here: TODO
+I wrote and used the script `dinos_downloader.py` which downloads images from Bing to create my own custom dataset of 47 species of dinosaurs. The dataset can be found here: [Jurassic Park Dinosaurs Dataset](https://www.kaggle.com/datasets/antaresl/jurassic-park-dinosaurs-dataset)
 
-I cleaned the downloaded images both automatically (also in `dinos_downloader.py`) and manually (to get rid of nonsense images) and the result is 4364 images of 47 different species of dinosaurs that are known to appear in the Jurassic Park movies.
+I cleaned the downloaded images both automatically (also in `dinos_downloader.py`) and manually (to get rid of wrong images) and the result is 4364 images of 47 different species of dinosaurs that are known to appear in the Jurassic Park movies.
 
 # Workflow
 After cleaning the images, they needed to be changed into a unified format `.png` so I wrote and used the `png_converter.py` script for converting all the images into `.png` format, and saving them accordingly into a `/png` folder containing all the folders of dinosaurs.
@@ -25,6 +25,6 @@ TODO PLACE THE ACCURACY AND LOSS GRAPHS
 
 # Predicting 
 I wrote `predict_one_image.py` script that takes a path to an image and predicts which dinosaur it is. 
-For a folder of images the same can be done with `predict_images.py`
+For a folder of images the same can be done with `predict_images.py` where the image are required to be saved in the folder `images_to_predict.py`
 TODO ukázky prediction
 
