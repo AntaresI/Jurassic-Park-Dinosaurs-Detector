@@ -26,7 +26,7 @@ I used the `MobileNet` model available in [Keras trained CNN models](https://ker
 K-fold cross validation was used for a better training. Script `k_fold_cross_validation_model.py` implements the splitting of train and val data into 5 random shuffles and performs the training.
 
 This model was trained for 40 epochs with a batch_size of 20. 
-![hi](/images_to_predict/training_result.png)
+![hi](/Other_images/training_result.png)
 
 The model achieved 57.24 % accuracy on the test_set
 
