@@ -15,7 +15,7 @@ with open('dino_dict.txt') as f:
 # reconstructing the data as a dictionary
 dino_labels = json.loads(dino_labels)
   
-model = load_model('/Weights/mobilenet_weights_1.h5')
+model = load_model('Weights/mobilenet_weights_1.h5')
 
 directory = "images_to_predict"
 
