@@ -22,7 +22,7 @@ directory = "images_to_predict"
 
 for filename in os.listdir(directory):
    
-        im = Image.open(directory+'/'+filename)
+        im = Image.open(directory+'/'+filename).convert('RGB')
       
         image = np.asarray(im)
 

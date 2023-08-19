@@ -25,7 +25,7 @@ def predict_one(img_path):
    
     model = load_model('Weights/mobilenet_weights_1.h5')
     
-    im = Image.open(img_path)
+    im = Image.open(img_path).convert('RGB')
 
     imageresize = im.resize((224,224))
     
