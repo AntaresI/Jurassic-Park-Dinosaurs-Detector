@@ -7,7 +7,7 @@ The model is hosted via Streamlit here: [Dinosaur detector](https://mqvscmjomxjr
 
 # Demonstration
 Here is a quick demonstration of the website and model predictions
-![hi](/images_to_predict/Show.png)
+![hi](Show.png)
 # Dataset
 I wrote and used the script `dinos_downloader.py` which downloads images from Bing to create my own custom dataset of 47 species of dinosaurs. The dataset can be found here: [Jurassic Park Dinosaurs Dataset](https://www.kaggle.com/datasets/antaresl/jurassic-park-dinosaurs-dataset)
 
@@ -35,5 +35,5 @@ The model achieved 57.24 % accuracy on the test_set
 # Predicting 
 I wrote `predict_one_image.py` script that takes a path to an image and predicts which dinosaur it is. 
 For a folder of images the same can be done with `predict_images.py` where the image are required to be saved in the folder `images_to_predict.py`
-TODO ukázky prediction
+
 
