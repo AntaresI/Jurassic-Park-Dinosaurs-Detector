@@ -78,7 +78,7 @@ for layer in vgg.layers[:3]:
 x = MaxPooling2D(pool_size=(2, 2),
    strides=(2, 2), padding='valid')(vgg.output)
 x = Flatten()(x)
-x = Dense(400, activation='relu')(x)
+x = Dense(1400, activation='relu')(x)
 x = Dropout(0.5)(x)
 prediction = Dense(47, activation='softmax')(x)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,7 +124,7 @@ model.evaluate(test_set,batch_size=args.batch_size)
 """"""""""""""""""""""""""""""""
 
 """SAVING WEIGHTS"""
-model.save("modelnet_weights_1.h5")
+model.save("modelnet_weights_2.h5")
 """"""""""""""""""""
 
 """PLOTTING THE ACCURACY AND LOSS AFTER TRAINING"""
