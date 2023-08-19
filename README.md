@@ -28,7 +28,7 @@ K-fold cross validation was used for a better training. Script `k_fold_cross_val
 This model was trained for 40 epochs with a batch_size of 20. 
 ![hi](/Other_images/training_result.png)
 
-The model achieved 57.24 % accuracy on the test_set
+The model achieved 57.28 % accuracy on the test_set
 
 ![hi](/Other_images/mobilenet_57_percent_acc.png)
 ![hi](/Other_images/mobilenet_57_percent_loss.png)
