@@ -30,8 +30,8 @@ This model was trained for 40 epochs with a batch_size of 20.
 
 The model achieved 57.24 % accuracy on the test_set
 
-![hi](/images_to_predict/mobilenet_57_percent_acc.png)
-![hi](/images_to_predict/mobilenet_57_percent_loss.png)
+![hi](/Other_images/mobilenet_57_percent_acc.png)
+![hi](/Other_images/mobilenet_57_percent_loss.png)
 # Predicting 
 I wrote `predict_one_image.py` script that takes a path to an image and predicts which dinosaur it is. 
 For a folder of images the same can be done with `predict_images.py` where the image are required to be saved in the folder `images_to_predict.py`
