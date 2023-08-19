@@ -2,14 +2,7 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.layers import Dense, Flatten,Dropout, MaxPooling2D
 from tensorflow.keras.models import Model
-from tensorflow.keras.applications import EfficientNetB0
-from tensorflow.keras.applications import VGG16
 from tensorflow.keras.applications import MobileNet
-from tensorflow.keras.applications import MobileNetV2
-# from tensorflow.keras.applications import VGG19
-# from tensorflow.keras.applications import InceptionResNetV2
-# from tensorflow.keras.applications import InceptionV3
-#from tensorflow.keras.callbacks import EarlyStopping
 import tensorflow as tf
 import argparse
 import matplotlib.pyplot as plt

@@ -1,15 +1,9 @@
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.layers import Dense, Flatten,Dropout
+from tensorflow.keras.layers import Dense, Flatten,Dropout,MaxPooling2D 
 from tensorflow.keras.models import Model
-#from tensorflow.keras.applications import EfficientNetV2S
 import numpy as np
 from sklearn.model_selection import KFold
-from tensorflow.keras.applications import VGG16
-# from tensorflow.keras.applications import VGG19
-# from tensorflow.keras.applications import InceptionResNetV2
-# from tensorflow.keras.applications import InceptionV3
-#from tensorflow.keras.callbacks import EarlyStopping
 import tensorflow as tf
 import argparse
 import matplotlib.pyplot as plt
@@ -27,6 +21,9 @@ def create_model():
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     
     """ADDING A DENSE LAYER WITH DROPOUT AT THE END OF THE MODEL AND THEN PREDICTION LAYER"""
+    x = MaxPooling2D(pool_size=(2, 2),
+       strides=(2, 2), padding='valid')(vgg.output)
+    x = Flatten()(x)
     x = Flatten()(vgg.output)
     x = Dense(300, activation='relu')(x)
     x = Dropout(0.5)(x)
@@ -163,7 +160,7 @@ if __name__ == "__main__":
         """"""""""""""""""""""""""""""""
         
         """SAVING WEIGHTS"""
-        model.save("modelnet_5_fold_weights_{counter}.h5")
+        model.save("mobilenet_weights_{counter}.h5")
         """"""""""""""""""""
         
         """PLOTTING THE ACCURACY AND LOSS AFTER TRAINING"""
